@@ -1,0 +1,21 @@
+<input type="text" [value]="renderLabel(currentItem)" [(size)]="renderLabel(currentItem).length" (keyup)="onType($event)">
+
+<div class="input-content" *ngIf="typed?.length">
+    <ul>
+      <li (click)="createItem(typed)&&toggleDropdown()"> Criar </li>
+    </ul>
+</div>
+
+<div class="handler" (click)="toggleDropdown()">
+  <i [class]="'fa fa-' + (faIcon || 'menu')"> O </i>
+</div>
+
+<div class="list-content" *ngIf="opened">
+  <ul>
+    <!-- <li *ngIf="typed?.length" (click)="createItem(typed)"> Criar novo para ({{typed}}) </li> -->
+    <li
+      *ngFor="let item of list"
+      (click)="selectItem(item)&&toggleDropdown()"
+    > {{ renderLabel(item) }}</li>
+  </ul>
+</div>
